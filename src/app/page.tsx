@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BootSequence } from "@/components/3d/BootSequence";
 import { WormholeTransition } from "@/components/3d/WormholeTransition";
 import { PortalIris } from "@/components/3d/PortalIris";
-import HeroSection from "@/components/sections/HeroSection";
+import PlanetCarousel from "@/components/sections/PlanetCarousel"; // Updated import
 import { SkyEventsCinema } from "@/components/sections/SkyEventsCinema";
 import CosmicWeather from "@/components/sections/CosmicWeather";
 import { MissionTimeline } from "@/components/sections/MissionTimeline";
@@ -151,7 +151,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen relative">
-        <HeroSection />
+        <PlanetCarousel />
       </section>
 
       {/* Sky Events Dashboard */}

@@ -1,5 +1,16 @@
 // API Configuration
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const getApiBase = () => {
+    try {
+        if (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_URL) {
+            return process.env.NEXT_PUBLIC_API_URL;
+        }
+    } catch (e) {
+        // process is not defined
+    }
+    return 'http://localhost:5000/api';
+};
+
+const API_BASE = getApiBase();
 
 interface ApiResponse<T> {
     success: boolean;
@@ -11,8 +22,13 @@ interface ApiResponse<T> {
 
 async function fetchApi<T>(endpoint: string): Promise<ApiResponse<T>> {
     try {
+        // Use window.fetch if available for client-side
         const response = await fetch(`${API_BASE}${endpoint}`, {
-            next: { revalidate: 60 }, // Cache for 1 minute
+            // Removed next: { revalidate: 60 } as it's not supported in standard client fetch
+            // and can cause issues if not stripped by Next.js
+            headers: {
+                'Content-Type': 'application/json',
+            }
         });
 
         if (!response.ok) {
@@ -21,7 +37,7 @@ async function fetchApi<T>(endpoint: string): Promise<ApiResponse<T>> {
 
         return await response.json();
     } catch (error) {
-        console.error(`API Error (${endpoint}):`, error);
+        console.warn(`API Error (${endpoint}):`, error); // Changed to warn to reduce noise
         return {
             success: false,
             error: error instanceof Error ? error.message : 'Unknown error'

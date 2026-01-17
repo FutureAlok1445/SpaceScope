@@ -1,0 +1,25 @@
+/* components/PlanetCarousel.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #020204;
+    overflow: hidden;
+    color: white;
+    /* Font fallbacks if Google Fonts fail */
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Ensure canvas takes full space */
+.container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Global vars shim if needed, though mostly inline now */
+:root {
+    --deep-void: #020204;
+    --electric-blue: #4facfe;
+}
